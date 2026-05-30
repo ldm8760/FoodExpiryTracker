@@ -5,10 +5,9 @@ import heroImg from "./assets/hero.png";
 import "./App.css";
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [items, setItems] = useState([]);
 
-    async function handleClick() {
-        setCount(count + 1);
+    async function viewItems() {
         try {
             const response = await fetch("/api/Items");
             if (!response.ok) {
@@ -16,7 +15,8 @@ function App() {
             }
 
             const result = await response.json();
-            console.log(result);
+
+            setItems((prevItems) => [...prevItems, ...result]);
         } catch (error) {
             console.error("Error sending data:", error);
         }
@@ -24,7 +24,9 @@ function App() {
 
     return (
         <main>
-            <button onClick={handleClick}>Count: {count}</button>
+            <button onClick={viewItems}>View Items</button>
+            <div>{items[0]}</div>
+            <div>{items[1]}</div>
         </main>
     );
 }
