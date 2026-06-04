@@ -11,4 +11,4 @@ CREATE TABLE Items (
 );
 
 INSERT INTO Items (Category, ItemName, ExpDate) 
-VALUES ('Poultry', 'Chicken', '2026-06-04'), ('Meat', 'Beef Patties', '2026-06-02');
+VALUES ('Poultry', 'Chicken', '06-04-2026'), ('Meat', 'Beef Patties', '06-02-2026');
