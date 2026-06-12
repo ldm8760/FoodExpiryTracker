@@ -16,3 +16,10 @@ class Items(Resource):
 
         add_item(category, itemname, date)
         return {"Message": "Success"}, 200
+    
+    def delete(self):
+        body = dict(request.get_json())
+        itemid = body["itemid"]
+
+        delete_item(itemid)
+        return {"Message": "Success"}, 200

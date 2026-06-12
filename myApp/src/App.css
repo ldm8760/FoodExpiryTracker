@@ -3,3 +3,268 @@
     flex-direction: row;
     justify-content: center;
 }
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: #0f1117;
+    color: #f4f7fb;
+}
+
+main {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+h1 {
+    margin: 0 0 48px;
+    text-align: center;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+}
+
+.input-box {
+    display: grid;
+    grid-template-columns: auto 160px 1fr 180px;
+    gap: 12px;
+    align-items: center;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.input-group {
+    width: 100%;
+}
+
+input,
+select,
+.p-inputtext {
+    width: 100%;
+    height: 44px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 0 14px;
+    background: #181b24;
+    color: white;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input::placeholder {
+    color: #7f8797;
+}
+
+input:focus,
+select:focus,
+.p-inputtext:focus {
+    border-color: #7c5cff;
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25);
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.add-btn {
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(135deg, #7c5cff, #19c37d);
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(124, 92, 255, 0.35);
+}
+
+.items-list {
+    margin-top: 28px;
+    display: grid;
+    gap: 14px;
+}
+
+.item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: #151822;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.item-card h2 {
+    margin: 2px 0;
+    font-size: 1.25rem;
+}
+
+.item-category {
+    margin: 0;
+    color: #19c37d;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.item-date {
+    margin: 0;
+    color: #aab2c0;
+}
+
+.delete-btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 75, 92, 0.12);
+    color: #ff6b7a;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 75, 92, 0.22);
+}
+
+@media (max-width: 720px) {
+    .input-box {
+        grid-template-columns: 1fr;
+    }
+
+    .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
+
+/* TouchUI modal */
+.p-datepicker-touch-ui {
+    background: #151822 !important;
+    color: #f4f7fb !important;
+
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+    width: min(95vw, 900px) !important;
+}
+
+/* Header */
+.p-datepicker-touch-ui .p-datepicker-header {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Month / year */
+.p-datepicker-touch-ui .p-datepicker-title,
+.p-datepicker-touch-ui .p-datepicker-month,
+.p-datepicker-touch-ui .p-datepicker-year {
+    color: #f4f7fb !important;
+    font-weight: 600;
+}
+
+/* Weekday labels */
+.p-datepicker-touch-ui th {
+    color: #8b93a7 !important;
+    font-weight: 600;
+}
+
+/* Day cells */
+.p-datepicker-touch-ui td span {
+    color: #f4f7fb !important;
+
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+
+    border-radius: 50% !important;
+
+    transition: all 0.15s ease;
+}
+
+/* Hover */
+.p-datepicker-touch-ui td span:hover {
+    background: rgba(124, 92, 255, 0.15) !important;
+}
+
+/* Selected day */
+.p-datepicker-touch-ui .p-highlight {
+    background: #7c5cff !important;
+    color: white !important;
+}
+
+/* Today */
+.p-datepicker-touch-ui .p-datepicker-today span {
+    border: 1px solid #19c37d !important;
+}
+
+/* Other month */
+.p-datepicker-touch-ui .p-datepicker-other-month span {
+    opacity: 0.35;
+}
+
+/* Overlay backdrop */
+.p-component-overlay {
+    background: rgba(0, 0, 0, 0.55) !important;
+}
+
+.p-datepicker-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.p-datepicker-prev,
+.p-datepicker-next {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+    background: none;
+
+    transition: all 0.15s ease;
+}
+
+.p-datepicker-prev:hover,
+.p-datepicker-next:hover {
+    background: rgba(124, 92, 255, 0.2);
+}
+
+.p-datepicker-trigger {
+    width: 44px;
+    min-width: 44px;
+
+    border-radius: 0 12px 12px 0 !important;
+
+    background: #2a2f3a !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-left: none !important;
+
+    color: #d1d5db !important;
+}
+.p-calendar .p-inputtext {
+    border-radius: 12px 0 0 12px !important;
+}

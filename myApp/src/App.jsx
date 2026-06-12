@@ -12,6 +12,7 @@ function App() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [itemname, setItemname] = useState("");
     const [date, setDate] = useState(null);
+    const [error, setError] = useState("");
 
     // Fetch data from server
     useEffect(() => {
@@ -55,6 +56,13 @@ function App() {
 
     // Add item functionality
     function addItem() {
+        if (!selectedCategory || !itemname || !date) {
+            setError("Please fill in all fields.");
+            return;
+        }
+
+        setError("");
+
         const formattedDate =
             date instanceof Date ? date.toISOString().slice(0, 10) : date;
 
@@ -76,6 +84,17 @@ function App() {
         resetInputs();
     }
 
+    function deleteItem(itemid) {
+        setItems(items.filter((item) => item.itemid !== itemid));
+        fetch("api/Items", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ itemid }),
+        });
+    }
+
     function resetInputs() {
         setSelectedCategory("");
         setItemname("");
@@ -85,9 +104,12 @@ function App() {
     return (
         <main>
             <h1>Expiration Tracker</h1>
+            {error && <p className="error-message">{error}</p>}
             <div className="input-box">
                 <div className="input-group">
-                    <button onClick={addItem}>Add Item</button>
+                    <button className="add-btn" onClick={addItem}>
+                        Add Item
+                    </button>
                 </div>
                 <div className="input-group">
                     <CategoryDropdown />
@@ -100,25 +122,36 @@ function App() {
                         onChange={(e) => setItemname(e.target.value)}
                     />
                 </div>
-                <div className="input-group">
+                <div id="date" className="input-group">
                     <Calendar
+                        name="date"
                         value={date}
                         onChange={(e) => setDate(e.value)}
                         touchUI
+                        showIcon
+                        dateFormat="mm-dd-y"
                     />
                 </div>
             </div>
 
-            <div>
+            <section className="items-list">
                 {items.map((item) => (
-                    <p key={item.itemid}>
-                        {item.category} {item.itemname}{" "}
-                        {item.expdate instanceof Date
-                            ? item.expdate.toLocaleDateString()
-                            : item.expdate}
-                    </p>
+                    <div className="item-card" key={item.itemid}>
+                        <div>
+                            <p className="item-category">{item.category}</p>
+                            <h2>{item.itemname}</h2>
+                            <p className="item-date">Expires: {item.expdate}</p>
+                        </div>
+
+                        <button
+                            className="delete-btn"
+                            onClick={() => deleteItem(item.itemid)}
+                        >
+                            Delete
+                        </button>
+                    </div>
                 ))}
-            </div>
+            </section>
         </main>
     );
 }
